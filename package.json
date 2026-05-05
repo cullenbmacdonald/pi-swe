@@ -1,0 +1,17 @@
+{
+  "name": "pi-swe",
+  "version": "0.1.0",
+  "description": "Personal general-SWE coding agent for Pi",
+  "keywords": ["pi-package"],
+  "author": "cullenbmacdonald <cmacdonald@justworks.com>",
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"],
+    "prompts": ["./prompts"]
+  },
+  "devDependencies": {
+    "@mariozechner/pi-coding-agent": "^0.70.6",
+    "typescript": "^5.0.0"
+  }
+}
