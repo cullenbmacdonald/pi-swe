@@ -7,7 +7,7 @@ import {
 } from "@mariozechner/pi-coding-agent";
 import { Type, complete, type Context } from "@mariozechner/pi-ai";
 
-const SUBAGENT_PROVIDER = "anthropic";
+const SUBAGENT_PROVIDER = "litellm";
 const SUBAGENT_MODEL = "claude-sonnet-4-6";
 
 const CONSULT_SYSTEM_PROMPT = `You are a reasoning helper spawned by another AI coding agent.
