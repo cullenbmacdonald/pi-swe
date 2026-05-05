@@ -93,7 +93,7 @@ async function selectExtractionModel(
   return haiku;
 }
 
-function parseExtractionResult(text: string): ExtractionResult | null {
+export function parseExtractionResult(text: string): ExtractionResult | null {
   try {
     let jsonStr = text;
     const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -142,9 +142,11 @@ class QnAComponent implements Component {
     const editorTheme: EditorTheme = {
       borderColor: this.dim,
       selectList: {
-        selectedBg: (s: string) => `\x1b[44m${s}\x1b[0m`,
-        matchHighlight: this.cyan,
-        itemSecondary: this.gray,
+        selectedPrefix: this.cyan,
+        selectedText: this.cyan,
+        description: this.gray,
+        scrollInfo: this.dim,
+        noMatch: this.yellow,
       },
     };
 

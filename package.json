@@ -5,6 +5,10 @@
   "keywords": ["pi-package"],
   "author": "cullenbmacdonald <cmacdonald@justworks.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "pi": {
     "extensions": ["./extensions"],
     "skills": ["./skills"],
@@ -12,6 +16,7 @@
   },
   "devDependencies": {
     "@mariozechner/pi-coding-agent": "^0.70.6",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
   }
 }

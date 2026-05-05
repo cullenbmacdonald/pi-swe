@@ -9,22 +9,31 @@ const STATUS_KEY = "pi-swe:plan";
 // Consider a plan "active" if it was touched within this window. Keeps stale plans
 // from old sessions out of the footer, without being so tight that a lunch break
 // kills the hint.
-const ACTIVE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+export const ACTIVE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+export function pickActivePlan(
+  files: Array<{ full: string; mtime: number }>,
+  now = Date.now(),
+  activeWindowMs = ACTIVE_WINDOW_MS
+): { slug: string; mtime: number } | undefined {
+  const top = files
+    .filter((x) => now - x.mtime < activeWindowMs)
+    .sort((a, b) => b.mtime - a.mtime)[0];
+
+  if (!top) return undefined;
+  return { slug: basename(top.full, ".md"), mtime: top.mtime };
+}
 
 function findActivePlan(): { slug: string; mtime: number } | undefined {
   try {
-    const now = Date.now();
-    const candidates = readdirSync(PLANS_DIR)
+    const files = readdirSync(PLANS_DIR)
       .filter((f) => f.endsWith(".md"))
       .map((f) => {
         const full = join(PLANS_DIR, f);
         return { full, mtime: statSync(full).mtime.getTime() };
-      })
-      .filter((x) => now - x.mtime < ACTIVE_WINDOW_MS)
-      .sort((a, b) => b.mtime - a.mtime);
-    const top = candidates[0];
-    if (!top) return undefined;
-    return { slug: basename(top.full, ".md"), mtime: top.mtime };
+      });
+
+    return pickActivePlan(files);
   } catch {
     return undefined;
   }

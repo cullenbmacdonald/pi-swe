@@ -25,6 +25,19 @@ Later, once pushed to git:
 pi install git:github.com/cullenbmacdonald/pi-swe
 ```
 
+## Testing
+
+```bash
+npm install
+npm test
+```
+
+Use watch mode while developing:
+
+```bash
+npm run test:watch
+```
+
 ## Philosophy
 
 Opus for planning, Sonnet for grinding. Plans live as files. Context is sacred — subagents keep exploration cheap and parent-session clean.

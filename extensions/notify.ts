@@ -26,7 +26,7 @@ const isTextPart = (part: unknown): part is { type: "text"; text: string } =>
       "text" in part,
   );
 
-const extractLastAssistantText = (
+export const extractLastAssistantText = (
   messages: Array<{ role?: string; content?: unknown }>,
 ): string | null => {
   for (let i = messages.length - 1; i >= 0; i--) {
@@ -71,12 +71,12 @@ const plainMarkdownTheme: MarkdownTheme = {
   underline: (text) => text,
 };
 
-const simpleMarkdown = (text: string, width = 80): string => {
+export const simpleMarkdown = (text: string, width = 80): string => {
   const markdown = new Markdown(text, 0, 0, plainMarkdownTheme);
   return markdown.render(width).join("\n");
 };
 
-const formatNotification = (
+export const formatNotification = (
   text: string | null,
 ): { title: string; body: string } => {
   const simplified = text ? simpleMarkdown(text) : "";
@@ -118,11 +118,12 @@ export default function (pi: ExtensionAPI) {
     stopListening = ctx.ui.onTerminalInput((data) => {
       const sawFocusIn = data.includes(FOCUS_IN);
       const sawFocusOut = data.includes(FOCUS_OUT);
-      if (!sawFocusIn && !sawFocusOut) return;
+      if (!sawFocusIn && !sawFocusOut) return undefined;
 
       focusEventsSupported = true;
       if (sawFocusIn) terminalFocused = true;
       if (sawFocusOut) terminalFocused = false;
+      return undefined;
     });
   });
 
