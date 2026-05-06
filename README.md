@@ -8,7 +8,6 @@ A personal general-SWE coding agent for [Pi](https://pi.dev).
   - `answer.ts` — `/answer` command to extract and respond to agent questions in a structured TUI.
   - `compaction.ts` — session compaction utilities.
   - `notify.ts` — native desktop notification on agent turn completion (OSC 777).
-  - `status.ts` — session status display.
   - `subagents.ts` — `explore` (and later `critique`) tools that call Sonnet for cheap read-only work.
   - `work-journal.ts` — `/journal` command to process sessions into daily Obsidian worklogs.
 - **`skills/`** — on-demand playbooks loaded by the model when invoked.
@@ -17,6 +16,7 @@ A personal general-SWE coding agent for [Pi](https://pi.dev).
   - `review/` — formal code review playbook.
 
 - **`prompts/`** — slash-command templates (`/plan`, `/review`, …).
+- **`packages/pi-litellm-provider/`** — standalone shareable LiteLLM provider extension package.
 - **`AGENTS.md`** — the agent's operating instructions.
 
 ## Install
