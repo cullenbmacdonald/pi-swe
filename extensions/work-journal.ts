@@ -38,7 +38,7 @@ interface WorkJournalConfig {
 
 const DEFAULT_CONFIG: WorkJournalConfig = {
 	vaultPath: "~/Documents/work-journal",
-	filePattern: "{{date}}.md",
+	filePattern: "{{date}}-worklog.md",
 };
 
 function expandHome(p: string): string {
@@ -90,6 +90,10 @@ function getTodayDateString(): string {
 	return new Date().toISOString().split("T")[0];
 }
 
+function getTodayDailyLink(): string {
+	return `[[${getTodayDateString()}]]`;
+}
+
 function getProjectName(cwd: string): string {
 	return basename(cwd);
 }
@@ -118,6 +122,7 @@ export default function (pi: ExtensionAPI) {
 			const fileExists = existsSync(filePath);
 			const time = getTimeString();
 			const project = getProjectName(ctx.cwd);
+			const dailyLink = getTodayDailyLink();
 
 			// Read existing content so the agent knows what's already logged today
 			let existingContent = "";
@@ -147,6 +152,9 @@ export default function (pi: ExtensionAPI) {
 				"[[Justworks]], team member names, libraries, services, etc.",
 				"Do NOT wikilink generic words — only things that are or should be their own note.",
 				"",
+				"Include a wikilink to today's daily note somewhere in the entry (usually in **Links**):",
+				`- ${dailyLink}`,
+				"",
 				"## Context",
 				"",
 				`Target file: ${filePath}`,
@@ -163,7 +171,7 @@ export default function (pi: ExtensionAPI) {
 							"Do NOT repeat the file header or duplicate earlier entries.",
 							"Avoid duplicating TODOs that already appear above unless you have an update on them.",
 					  ].join("\n")
-					: `This is the first entry for today. Start with a top-level heading: \`# ${getTodayDateString()}\` followed by your entry.`,
+					: `This is the first entry for today. Start with a top-level heading: \`# ${getTodayDateString()}\` followed by your entry. Include daily-note wikilink ${dailyLink}.`,
 				"",
 				"## Instructions",
 				"",
