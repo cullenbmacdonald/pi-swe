@@ -23,9 +23,9 @@
     ]
   },
   "devDependencies": {
-    "@mariozechner/pi-coding-agent": "^0.70.6",
-    "@vitest/coverage-v8": "^3.2.4",
-    "typescript": "^5.0.0",
-    "vitest": "^3.2.4"
+    "@mariozechner/pi-coding-agent": "0.70.6",
+    "@vitest/coverage-v8": "3.2.4",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
   }
 }
